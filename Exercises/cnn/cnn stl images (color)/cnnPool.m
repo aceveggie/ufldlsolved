@@ -11,9 +11,9 @@ function pooledFeatures = cnnPool(poolDim, convolvedFeatures)
 %                   pooledFeatures(featureNum, imageNum, poolRow, poolCol)
 %     
 
-numImages = size(convolvedFeatures, 2);
-numFeatures = size(convolvedFeatures, 1);
-convolvedDim = size(convolvedFeatures, 3);
+numImages = size(convolvedFeatures, 2);		% 8 for testing pooling	
+numFeatures = size(convolvedFeatures, 1);	% 400	
+convolvedDim = size(convolvedFeatures, 3);	% 57
 
 pooledFeatures = zeros(numFeatures, numImages, floor(convolvedDim / poolDim), floor(convolvedDim / poolDim));
 
@@ -30,6 +30,20 @@ pooledFeatures = zeros(numFeatures, numImages, floor(convolvedDim / poolDim), fl
 %   
 %   Use mean pooling here.
 % -------------------- YOUR CODE HERE --------------------
+% output from cnnConvolve.m
+%  convolvedFeatures - matrix of convolved features in the form
+%                      convolvedFeatures(featureNum, imageNum, imageRow, imageCol)
+m = floor(convolvedDim / poolDim);
+for featureNum = 1:numFeatures;
+	for imageNum = 1:numImages;
+		for i=1:m;
+			for j=1:m;
+				block = mean(mean(convolvedFeatures(featureNum, imageNum, 1+(i-1)*poolDim:i*poolDim, 1+(j-1)*poolDim:j*poolDim)));
+				pooledFeatures(featureNum, imageNum, i, j) = block;
+			end;
+		end;
+	end;
+end;	
 
 end
 

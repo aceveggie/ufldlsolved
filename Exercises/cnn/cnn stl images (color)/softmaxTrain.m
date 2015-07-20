@@ -28,6 +28,13 @@ theta = 0.005 * randn(numClasses * inputSize, 1);
 
 % Use minFunc to minimize the function
 disp('optimizing the cost function for softmax regression');
+
+% size(theta)
+% size(inputSize)
+% size(inputData)
+% size(labels)
+% disp('-------')
+
 myCostFunc = @(theta) softmax_regression(theta(:), numClasses, inputSize, lambda, inputData, labels);
 [theta(:), cost] = fmincg(myCostFunc, theta(:), options);
 
