@@ -1,1 +1,0 @@
-../linear/displayColorNetwork.m

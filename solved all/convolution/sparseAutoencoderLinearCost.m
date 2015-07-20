@@ -1,1 +1,0 @@
-../linear/sparseAutoencoderLinearCost.m
